@@ -8,5 +8,5 @@ for docker image - sbt docker:publishLocal <br>
 for code coverage - sbt jacoco
 
 
-Raghav Saxena
+Raghav Saxena <br>
 26 Aug 2020
