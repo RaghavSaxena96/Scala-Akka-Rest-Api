@@ -135,7 +135,8 @@ class UnitTest extends WordSpec with UserService  with Matchers with ScalatestRo
   // ------------------------------------  Functional test -----------------------------------------
 
 
-  // Get User Details Unit Test
+  "Post request" should {
+    "Create user" in{
   val jsonRequest = ByteString(
     s"""
        |{
@@ -153,7 +154,9 @@ class UnitTest extends WordSpec with UserService  with Matchers with ScalatestRo
     status.isSuccess() shouldEqual true
     responseAs[String] shouldEqual "User Created"
 
-  }
+  }}}
+
+
 
 
   "Get Request" should {

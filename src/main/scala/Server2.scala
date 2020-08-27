@@ -44,17 +44,21 @@ trait UserService extends UserJson with mapping // UserService Handler
        path("Users")
         {
           get {
-            complete(listbuf.toList)
+            complete(Mlist.toList)
           }
         }~
          path("User") {
             post {
                entity(as[User]) { usr =>
-                  //User(usr.id, usr.name, usr.amount)
-                 MAMT += (usr.id -> usr.amount)
-                 MName += (usr.id -> usr.name)
-                 listbuf += User(usr.id,usr.name,usr.amount)
-                  complete("User Created")
+
+                 var pre = MAMT.getOrElse(usr.id, default = -1)
+
+                   //User(usr.id, usr.name, usr.amount)
+                   MAMT += (usr.id -> usr.amount)
+                   MName += (usr.id -> usr.name)
+                   Mlist += (usr.id -> usr)
+                   complete("User Created")
+
                }
             } ~
               delete {
@@ -65,6 +69,7 @@ trait UserService extends UserJson with mapping // UserService Handler
                    if (pre > 0) {
                      MAMT = MAMT.-(x.id)
                      MName = MName.-(x.id)
+                     Mlist = Mlist.-(x.id)
                      complete("User Deleted")
                    }
                    else
@@ -88,8 +93,12 @@ trait UserService extends UserJson with mapping // UserService Handler
 
                 if(pre>0)
                   {
+
                  //Update(x.id, x.amount)
                  MAMT += (x.id -> x.amount)
+                    var y= User(x.id,MName.getOrElse(x.id,default = "none"),x.amount)
+
+                    Mlist += (x.id -> y)
                  complete("User details Updated")
                   }
                 else
@@ -117,7 +126,7 @@ object Server2 extends App with UserService
 
 
 
-   println("Server is working on http://localhost:9090")
+   println("--------------Server is working on http://localhost:9090------------------")
 
   val bindingFuture = Http().bindAndHandle(route,"0.0.0.0",9090)
 

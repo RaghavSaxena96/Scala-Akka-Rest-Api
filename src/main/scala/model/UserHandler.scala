@@ -17,5 +17,5 @@ trait mapping {
   import UserHandler._
   var MName : Map[Int,String] = Map()
   var MAMT : Map[Int,Int] = Map()
-  var listbuf = ListBuffer[User]()
+  var Mlist : Map[Int,User] = Map()
 }
