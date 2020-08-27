@@ -19,8 +19,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http-testkit" % AkkaHttpVersion,
   "org.scalatest" %% "scalatest" % "3.0.8" % Test,
   "org.mockito" % "mockito-all" % "1.9.5" % Test ,
-  "com.github.etaty" %% "rediscala" % "1.9.0"
-
+  "com.github.etaty" %% "rediscala" % "1.9.0",
+  "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
 
 
